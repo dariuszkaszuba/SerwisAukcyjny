@@ -5,6 +5,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.sa.serwisaukcyjny.model.Product;
 import pl.sa.serwisaukcyjny.model.ShoppingCart;
 import pl.sa.serwisaukcyjny.service.ShoppingCartService;
@@ -35,11 +37,21 @@ public class CartController {
         return "cart";
     }
 
+    @GetMapping("/allproducts/{id}")
+    public String addProductToCart(Model model, Authentication authentication, Long id) {
+        model.addAttribute("product", new Product());
+        model.addAttribute("auth", authentication);
 
-//    @GetMapping("/")
-//    public String addProductToCart(Model model, Authentication authentication, Long id, Product product) {
-//        ShoppingCart shoppingCarts = shoppingCartService.getProductByUserEmail(authentication);
-//        model.addAttribute("cart", shoppingCartService.addProductToCart(id, product));
-//        return "redirect:/";
+        return "redirect:/";
+    }
+
+//    @PostMapping("/")
+//    public String addProductToCart(
+//            @ModelAttribute("post")
+//            Authentication authentication,
+//            Model model,
+//            Long id){
+//        shoppingCartService.addProductToCart(id, new)
+//
 //    }
 }

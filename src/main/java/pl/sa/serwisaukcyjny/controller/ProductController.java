@@ -38,33 +38,40 @@ public class ProductController {
 
     @PostMapping("addproduct")
     public String addProduct(@ModelAttribute("product") @Valid ProductDto productDto,
-                             BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "addpostForm";
         }
-        System.out.println("Dodano produkt: "+
+        System.out.println("Dodano produkt: " +
                 productService.createProductByUser(productDto));
         return "redirect:/";
     }
 
     @GetMapping("/deleteproduct/{id}")
-    public String deleteProduct(@PathVariable("id") Long id){
+    public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
         return "redirect:/";
     }
 
     @GetMapping("/updateproduct/{id}")
-    public String updateProduct(@PathVariable("id") Long id, Model model){
-        Product product= productService.getProductById(id);
+    public String updateProduct(@PathVariable("id") Long id, Model model) {
+        Product product = productService.getProductById(id);
         model.addAttribute("product", product);
         return "updateProduct";
     }
 
     @PostMapping("/allproduct/{id}")
-    public String updatePost(@ModelAttribute @Valid Product product, Model model){
+    public String updatePost(@ModelAttribute @Valid Product product, Model model) {
         Long id = product.getId();
         Product updateProduct = productService.updateProduct(id, product);
         model.addAttribute("product", updateProduct);
         return "product";
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        List<Product> products =productService.getAllProduct();
+        model.addAttribute("products", products);
+        return "index";
     }
 }

@@ -12,10 +12,10 @@ public class FrontController {
 //        this.service = service;
 //    }
 
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String home() {
+//        return "index";
+//    }
 
    @GetMapping("/categories")
     public String Categories() {

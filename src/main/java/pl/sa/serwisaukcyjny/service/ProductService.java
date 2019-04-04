@@ -8,6 +8,8 @@ import pl.sa.serwisaukcyjny.model.dto.ProductDto;
 import pl.sa.serwisaukcyjny.repository.ProductRepository;
 import pl.sa.serwisaukcyjny.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class ProductService {
     ProductRepository productRepository;
@@ -51,4 +53,7 @@ public class ProductService {
     // delete modyfikacja dodawnaie do koszyka
 
 //    public
+    public List<Product> getAllProduct(){
+        return productRepository.findAll();
+    }
 }

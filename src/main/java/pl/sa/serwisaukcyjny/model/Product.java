@@ -33,6 +33,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Product() {
+    }
 
     public Product(@NotNull String title, @NotNull String description, @NotNull String location, LocalDateTime end_added, Category category) {
         this.title = title;
