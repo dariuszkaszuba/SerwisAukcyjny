@@ -38,6 +38,7 @@ public class ProductService {
     }
 
     public Product getProductById(Long id){
+        System.out.println(id);
         return productRepository.getOne(id);
     }
 
@@ -56,4 +57,5 @@ public class ProductService {
     public List<Product> getAllProduct(){
         return productRepository.findAll();
     }
+
 }

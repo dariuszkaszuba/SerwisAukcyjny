@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sa.serwisaukcyjny.model.Product;
 import pl.sa.serwisaukcyjny.model.ShoppingCart;
+import pl.sa.serwisaukcyjny.service.ProductService;
 import pl.sa.serwisaukcyjny.service.ShoppingCartService;
 
 import java.util.List;
@@ -17,10 +18,12 @@ import java.util.List;
 public class CartController {
 
     ShoppingCartService shoppingCartService;
+    ProductService productService;
 
     @Autowired
-    public CartController(ShoppingCartService shoppingCartService) {
+    public CartController(ShoppingCartService shoppingCartService, ProductService productService) {
         this.shoppingCartService = shoppingCartService;
+        this.productService = productService;
     }
 
     //    Service service;
@@ -39,10 +42,10 @@ public class CartController {
 
     @GetMapping("/allproducts/{id}")
     public String addProductToCart(Model model, Authentication authentication, Long id) {
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", productService.getProductById(id) );
         model.addAttribute("auth", authentication);
 
-        return "redirect:/";
+        return "product";
     }
 
 //    @PostMapping("/")

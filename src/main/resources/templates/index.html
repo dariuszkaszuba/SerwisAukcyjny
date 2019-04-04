@@ -397,14 +397,15 @@
         <div class="section_container">
             <div class="container">
                 <div class="row">
-                    <div class="col">
-                        <div th:each="product: ${products}" class="products_container grid">
+                    <div th:each="product: ${products}" class="col">
+                        <div  class="products_container grid">
                             <a th:href="@{'allproducts/' + ${product.getId()}}">
                                 <h2 th:text="${product.getTitle()}" class="post-title">
                                     title
                                 </h2>
+                                <hr>
                             </a>
-                            <!-- Product -->
+                             <!--Product -->
                             <!--<div class="product grid-item hot">-->
                                 <!--<div class="product_inner">-->
                                     <!--<div class="product_image">-->
