@@ -2,6 +2,7 @@ package pl.sa.serwisaukcyjny.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import pl.sa.serwisaukcyjny.model.Product;
 import pl.sa.serwisaukcyjny.model.ShoppingCart;
@@ -17,14 +18,15 @@ import java.util.List;
 public class ShoppingCartService {
     ShoppingCartRepository shoppingCartRepository;
     UserRepository userRepository;
-
-    @Autowired
-    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository, UserRepository userRepository) {
+    UserService userService;
+@Autowired
+    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository, UserRepository userRepository, UserService userService) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
-//    @Autowired
+    //    @Autowired
 //    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository) {
 //        this.shoppingCartRepository = shoppingCartRepository;
 //    }
@@ -36,7 +38,9 @@ public class ShoppingCartService {
     }
 
     public ShoppingCart getProductByUserEmail(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String email = userDetails.getUsername();
+        User user = userService.getUserNameByEmail(email);
         ShoppingCart shoppingCart = user.getShoppingCart();
         return shoppingCart;
     }
