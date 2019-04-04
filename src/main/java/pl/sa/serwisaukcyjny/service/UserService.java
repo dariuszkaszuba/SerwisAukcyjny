@@ -1,6 +1,7 @@
 package pl.sa.serwisaukcyjny.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sa.serwisaukcyjny.model.User;
@@ -35,5 +36,10 @@ public class UserService {
         Role role = roleRepository.getOne((long) 1);
         user.addRole(role);
         return userRepository.save(user);
+    }
+    public User getUserNameByEmail(String email)
+    {
+
+        return userRepository.findByEmail(email);
     }
 }

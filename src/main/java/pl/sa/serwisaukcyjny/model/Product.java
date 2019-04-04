@@ -43,4 +43,7 @@ public class Product {
         this.end_added = end_added;
         this.category = category;
     }
+
+    public Product() {
+    }
 }
